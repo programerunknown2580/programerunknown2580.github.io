@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Dog Picture Generator</title>
+  </head>
+  <body>
+    <button id="dog-button">Get a random dog picture</button>
+    <br />
+    <img id="dog-image" src="https://images.dog.ceo/breeds/spaniel-brittany/n02101388_1938.jpg" alt="Random dog picture" />
+    <script>
+      const dogPictures = [
+        'https://images.dog.ceo/breeds/papillon/n02086910_1070.jpg',
+        'https://images.dog.ceo/breeds/malamute/n02110063_12022.jpg',
+        'https://images.dog.ceo/breeds/setter-irish/n02100877_10296.jpg',
+        'https://images.dog.ceo/breeds/saluki/n02091831_5252.jpg',
+        'https://images.dog.ceo/breeds/terrier-border/n02093754_1641.jpg',
+        'https://images.dog.ceo/breeds/hound-afghan/n02088094_6167.jpg'
+      ];
+
+      function getRandomDogPicture() {
+        const randomNumber = Math.floor(Math.random() * dogPictures.length);
+        const dogPicture = dogPictures[randomNumber];
+        document.getElementById('dog-image').src = dogPicture;
+      }
+
+      document.getElementById('dog-button').addEventListener('click', getRandomDogPicture);
+    </script>
+  </body>
+</html>
