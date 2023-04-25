@@ -1,25 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Random Dog Picture Generator</title>
-    <link rel="icon" type="image/x-icon" href="cutest-dog-breeds-.png>
+    <title>Random Picture Generator</title>
   </head>
   <body>
-    <button id="dog-button" type="button">Get a random dog picture</button>
-    <br />
-    <img id="dog-image" src="cutest-dog-breeds-.png" alt="Random dog picture" />
+    <button id="picture-button">Get a random picture</button>
+    <br>
+    <img id="picture-display" src="images/image_2.png" alt="Random Picture">
+    
     <script>
-      const dogPictures = [
-        <img src="cutest-dog-breeds-.png">
+      let pictures = [
+        "01g51tke1zr51hft6762.png",
+        "cutest-dog-breeds-.png",
+        "image.png",
+        
       ];
-
-      function getRandomDogPicture() {
-        const randomNumber = Math.floor(Math.random() * dogPictures.length);
-        const dogPicture = dogPictures[randomNumber];
-        document.getElementById('dog-image').src ="dogPicture";
-      }
-
-      document.getElementById('dog-button').addEventListener('click', getRandomDogPicture());
+      let currentIndex = 0;
+      const pictureDisplay = document.getElementById('picture-display');
+      
+      // Show a random picture on page load
+      const randomIndex = Math.floor(Math.random() * pictures.length);
+      pictureDisplay.src = "images/" + pictures[randomIndex];
+      currentIndex = randomIndex;
+      
+      // Add event listener for picture button click
+      document.getElementById('picture-button').addEventListener('click', () => {
+        let randomIndex = Math.floor(Math.random() * pictures.length);
+        while (randomIndex === currentIndex) {
+          randomIndex = Math.floor(Math.random() * pictures.length);
+        }
+        pictureDisplay.src = "images/" + pictures[randomIndex];
+        currentIndex = randomIndex;
+      });
     </script>
   </body>
 </html>
