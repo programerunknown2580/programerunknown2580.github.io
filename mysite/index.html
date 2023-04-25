@@ -10,7 +10,7 @@
     <img id="dog-image" src="cutest-dog-breeds-.png" alt="Random dog picture" />
     <script>
       const dogPictures = [
-        'cutest-dog-breeds-.png'
+        <img src="cutest-dog-breeds-.png">
       ];
 
       function getRandomDogPicture() {
@@ -19,7 +19,7 @@
         document.getElementById('dog-image').src = dogPicture;
       }
 
-      document.getElementById('dog-button').addEventListener('click', getRandomDogPicture);
+      document.getElementById('dog-button').addEventListener('click', getRandomDogPicture());
     </script>
   </body>
 </html>
