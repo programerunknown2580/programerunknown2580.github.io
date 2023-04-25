@@ -16,7 +16,7 @@
       function getRandomDogPicture() {
         const randomNumber = Math.floor(Math.random() * dogPictures.length);
         const dogPicture = dogPictures[randomNumber];
-        document.getElementById('dog-image').src = dogPicture;
+        document.getElementById('dog-image').src ="dogPicture";
       }
 
       document.getElementById('dog-button').addEventListener('click', getRandomDogPicture());
