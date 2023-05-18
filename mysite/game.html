@@ -1,10 +1,141 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>game</title>
-    </head>
-    <body>
-        <tr>
-            <td> </td>
-        </tr>
-    </body>
+<head>
+	<title>Tic-Tac-Toe Game</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+
+		button {
+			font-size: 36px;
+			width: 100px;
+			height: 100px;
+			margin: 5px;
+			border: none;
+			background-color: #f2f2f2;
+			cursor: pointer;
+		}
+
+		.x {
+			color: #ff6347;
+		}
+
+		.o {
+			color: #4169e1;
+		}
+
+		#winner {
+			color: #ff8c00;
+			font-size: 48px;
+			margin: 20px;
+			display: none;
+		}
+
+		#reset {
+			font-size: 24px;
+			color: #ffffff;
+			background-color: #4169e1;
+			border: none;
+			padding: 10px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Tic-Tac-Toe Game</h1>
+	<div id="board">
+		<button id="0"></button>
+		<button id="1"></button>
+		<button id="2"></button>
+		<br>
+		<button id="3"></button>
+		<button id="4"></button>
+		<button id="5"></button>
+		<br>
+		<button id="6"></button>
+		<button id="7"></button>
+		<button id="8"></button>
+	</div>
+	<div id="winner"></div>
+	<button id="reset">Reset Game</button>
+
+	<script>
+		// Variables
+		const board = document.getElementById("board");
+		const buttons = document.querySelectorAll("button");
+		const winnerDisplay = document.getElementById("winner");
+		const resetButton = document.getElementById("reset");
+		let currentPlayer = "X";
+		let moves = 0;
+		let winner = null;
+
+		// Functions
+		function handleMove(button, index) {
+			button.classList.add(currentPlayer);
+			button.disabled = true;
+			button.innerHTML = currentPlayer;
+			moves++;
+			checkWinner();
+			switchPlayer();
+		}
+
+		function switchPlayer() {
+			currentPlayer = currentPlayer === "X" ? "O" : "X";
+		}
+
+		function checkWinner() {
+			const winningCombos = [
+				[0, 1, 2],
+				[3, 4, 5],
+				[6, 7, 8],
+				[0, 3, 6],
+				[1, 4, 7],
+				[2, 5, 8],
+				[0, 4, 8],
+				[2, 4, 6]
+			];
+			for (let i = 0; i < winningCombos.length; i++) {
+				const [a, b, c] = winningCombos[i];
+				if (buttons[a].classList.contains(currentPlayer) &&
+					buttons[b].classList.contains(currentPlayer) &&
+					buttons[c].classList.contains(currentPlayer)) {
+					winner = currentPlayer;
+				}
+			}
+			if (winner !== null) {
+				board.style.pointerEvents = "none";
+				winnerDisplay.innerHTML = `${winner} wins!`;
+				winnerDisplay.style.display = "block";
+			} else if (moves === 9) {
+				winnerDisplay.innerHTML = "It's a tie!";
+				winnerDisplay.style.display = "block";
+			}
+		}
+
+		function resetGame() {
+			currentPlayer = "X";
+			moves = 0;
+			winner = null;
+			buttons.forEach(button => {
+				button.classList.remove("X");
+				button.classList.remove("O");
+				button.disabled = false;
+				button.innerHTML = "";
+			});
+			board.style.pointerEvents = "auto";
+			winnerDisplay.style.display = "none";
+		}
+
+		// Event Listeners
+		buttons.forEach(button => {
+			button.addEventListener("click", () => {
+				handleMove(button, button.id);
+			});
+		});
+
+		resetButton.addEventListener("click", resetGame);
+	</script>
+</body>
 </html>
